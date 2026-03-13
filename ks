@@ -20,7 +20,7 @@ function print_ks_commands {
 function create_project {
 
   local directory=$1
-  local url=$url
+  local url=$2
 
   kickstart --directory $directory $url
 }
@@ -32,9 +32,10 @@ function main TRAPEXIT {
 
   local ks_command=${args[1]}
   local ks_template=${args[-1]}
+  local ks_url=$url
 
   [[ $ks_command == 'gen' ]] \
-    && create_project $ks_template \
+    && create_project $ks_template $ks_url \
     || print_ks_commands
 }
 
