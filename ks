@@ -22,7 +22,19 @@ function create_project {
   local directory=$1
   local url=$2
 
-  kickstart --directory $directory $url
+  kickstart --directory $directory $url 2>/dev/null
+}
+
+function list_templates {
+
+  local template=$1
+  local -a templates=('cc-sample')
+
+  f() { printf "  • %s\n" $1 }
+
+  echo "The \`$template\` template is missing.\n"
+  echo "Here's a list of available templates:\n"
+  each f $templates
 }
 
 ##
@@ -35,7 +47,7 @@ function main TRAPEXIT {
   local ks_url=$url
 
   [[ $ks_command == 'gen' ]] \
-    && create_project $ks_template $ks_url \
+    && (create_project $ks_template $ks_url || list_templates $ks_template) \
     || print_ks_commands
 }
 
