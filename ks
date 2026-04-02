@@ -28,7 +28,11 @@ function create_project {
 function list_templates {
 
   local template=$1
-  local -a templates=('cc-sample')
+  local -a templates=(
+    'cc-sample'
+    'qt-sample'
+    'qt-timer-sample'
+  )
 
   f() { printf "  • %s\n" $1 }
 
